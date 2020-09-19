@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+}
+
+td {
+  border: solid 1px black;
+  border-radius: 2px;
+  text-align: center;
+  padding: 20px;
+}
+
+button {
+  min-height: -webkit-min-content;
+  min-height: -moz-min-content;
+  min-height: min-content;
+  width: 100%;
+  color: brown;
+  background: rgb(248, 227, 40);
+  margin: 10px 0;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: xx-large;
+}
