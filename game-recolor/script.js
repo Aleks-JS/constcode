@@ -5,14 +5,15 @@ const colors = [
   "Orange",
   "red",
   "DeepPink",
-  "Maroon",
-  "Lime",
-  "Navy",
-  "Aqua",
+  // "Maroon",
+  // "Lime",
+  // "Navy",
+  // "Aqua",
 ];
-const result = [];
 const matrix = [];
-let count = 0;
+let result = 0;
+let countClick = 0;
+let countResult = 0;
 
 createTable(parent, 6, 6);
 initialPaintingTable(parent, colors);
@@ -21,98 +22,41 @@ createButton(blockButtons, colors);
 const table = document.querySelector("table");
 const trs = table.querySelectorAll("tr");
 const countBlock = document.querySelector(".count");
-console.log(countBlock);
 
 trs.forEach((tr, y) => {
-  const rowMatrix = [];
-  const rowResult = [];
+  const row = [];
   const tds = tr.querySelectorAll("td");
   tds.forEach((td, x) => {
     const color = td.style.backgroundColor;
-    rowMatrix.push(color);
+    row.push({ [color]: false });
+    result += 1;
   });
-  matrix.push(rowMatrix);
-  result.push(rowResult);
+  matrix.push(row);
 });
-
-let previous = matrix[0][0];
-console.log(previous);
-
-console.log(matrix);
 
 const buttons = document.querySelectorAll("button");
 buttons.forEach((btn) => {
   btn.addEventListener("click", () => {
+    countClick += 1;
+    const previous = Object.keys(matrix[0][0])[0];
     const btnColor = btn.style.backgroundColor;
     matrix.forEach((row, y) => {
-      row.forEach((color, x) => {
-        const previous = matrix[0][0];
-        matrix[0][0] = btnColor;
-
+      row.forEach((cell, x) => {
+        if (Object.keys(cell)[0] === btnColor) {
+          return;
+        }
+        if (y === 0 && x === 0) matrix[y][x] = { [btnColor]: true };
+        changeElement(matrix, y, x - 1, previous, cell, btnColor, y, x);
+        changeElement(matrix, y, x + 1, previous, cell, btnColor, y, x);
+        changeElement(matrix, y - 1, x, previous, cell, btnColor, y, x);
+        changeElement(matrix, y + 1, x, previous, cell, btnColor, y, x);
+        Object.values(matrix[y][x])[0] && (countResult += 1);
       });
     });
     setView(matrix, trs);
+    //getResult(matrix);
   });
 });
-
-// buttons.forEach((btn) => {
-//   btn.addEventListener("click", (e) => {
-//     count++;
-//     countBlock.textContent = `Вы нажали ${count} раз`
-//     const color = e.target.style.backgroundColor;
-//     result.forEach((i) => {
-//       const arrX = i.x;
-//       const arrY = i.y;
-//       const changeCell = document.querySelector(
-//         `[data-x="${arrX}"][data-y="${arrY}"]`
-//       );
-//       changeCell.style.backgroundColor = color;
-//       trs.forEach((tr, x) => {
-//         const tds = tr.querySelectorAll("td");
-//         tds.forEach((td, y) => {
-//           const cellX = td.dataset.x;
-//           const cellY = td.dataset.y;
-//           const cellColor = td.style.backgroundColor;
-//           if (
-//             cellX == parseInt(arrX) + 1 &&
-//             cellY == parseInt(arrY) &&
-//             cellColor === color
-//           ) {
-//             const cell = { x: cellX, y: cellY };
-//             result.push(cell);
-//           }
-//           if (
-//             cellX == parseInt(arrX) - 1 &&
-//             cellY == parseInt(arrY) &&
-//             cellColor === color
-//           ) {
-//             const cell = { x: cellX, y: cellY };
-//             result.push(cell);
-
-//           }
-//           if (
-//             cellX == parseInt(arrX) &&
-//             cellY == parseInt(arrY) + 1 &&
-//             cellColor === color
-//           ) {
-//             const cell = { x: cellX, y: cellY };
-//             result.push(cell);
-
-//           }
-//           if (
-//             cellX == parseInt(arrX) &&
-//             cellY == parseInt(arrY) - 1 &&
-//             cellColor === color
-//           ) {
-//             const cell = { x: cellX, y: cellY };
-//             result.push(cell);
-
-//           }
-//         });
-//       });
-//     });
-//   });
-// });
 
 function getColor() {
   return this.style.backgroundColor;
@@ -150,13 +94,6 @@ function initialPaintingTable(table, arr) {
   });
 }
 
-function initResult(arrResult, value, y, x) {
-  if (!arrResult[y][x]) {
-    arrResult[y].push(value);
-  }
-  return true;
-}
-
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -167,7 +104,37 @@ function setView(arr, row) {
   row.forEach((tr, y) => {
     const tds = tr.querySelectorAll("td");
     tds.forEach((td, x) => {
-      td.style.backgroundColor = arr[y][x];
+      td.style.backgroundColor = Object.keys(arr[y][x])[0];
+      Object.keys(arr[y][y])[0] && (countResult += 1);
+      console.log(countResult);
+    });
+  });
+}
+
+function changeElement(arr, y, x, prevValue, cell, newColor, modY, modX) {
+  if (
+    arr[y] !== undefined &&
+    arr[y][x] !== undefined &&
+    Object.keys(cell)[0] === prevValue &&
+    Object.keys(arr[y][x])[0] === newColor &&
+    Object.values(arr[y][x])[0]
+  ) {
+    arr[modY][modX] = { [newColor]: true };
+  }
+  return arr;
+}
+
+function getResult(arr, row) {
+  const color = td.style.backgroundColor
+  row.forEach((tr, y) => {
+    const tds = tr.querySelectorAll("td");
+    tds.forEach((td, x) => {
+      if (color != Object.keys(matrix[0][0])[0])
+      return;
+      alert('ert')
+      // td.style.backgroundColor = Object.keys(arr[y][x])[0];
+      // Object.keys(arr[y][y])[0] && (countResult += 1);
+      // console.log(countResult);
     });
   });
 }

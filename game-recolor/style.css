@@ -14,6 +14,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 }
 
 header {
@@ -32,11 +33,12 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: auto;
 }
 
 td {
-  height: 4vh;
-  min-width: 4vh;
+  height: 6vh;
+  min-width: 6vh;
 }
 
 button {
@@ -54,6 +56,7 @@ button {
   align-content: stretch;
   flex: 1 1 auto;
   padding: 1rem;
+  height: auto;
 }
 
 .buttons__field {
@@ -71,6 +74,7 @@ button {
   border: 0.2rem solid rgb(71, 71, 245);
   border-radius: 0.3rem;
   padding: 0.5rem;
+  flex: 1 0 auto;
 }
 
 .count__title {
@@ -78,11 +82,16 @@ button {
 }
 
 .count__result {
+  display: flex;
   flex: 2 1 auto;
 }
 
 .count__result-text {
+  min-height: 5vh;
 }
 
 .count__result-number {
+  min-width: 10vh;
+  min-height: 10vh;
+  border: 1px solid red;
 }
