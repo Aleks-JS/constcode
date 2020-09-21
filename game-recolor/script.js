@@ -1,11 +1,14 @@
-const parent = document.querySelector(".game__field");
+const parent = document.querySelector(".topology");
 const blockButtons = document.querySelector(".buttons__field");
+const countField = document.querySelector(".count__result-number");
+const countFieldSpan = document.querySelector(".count__result-number span");
+const span = document.createElement("span");
 const colors = [
-  "yellow",
-  "Orange",
-  "red",
-  "DeepPink",
-  // "Maroon",
+  "#392129",
+  "#86534e",
+  "#c9c2b2",
+  "#d7c770",
+  "#af323b",
   // "Lime",
   // "Navy",
   // "Aqua",
@@ -54,7 +57,9 @@ buttons.forEach((btn) => {
       });
     });
     setView(matrix, trs);
-    //getResult(matrix);
+    countFieldSpan.remove();
+    countField.append(span);
+    span.textContent = countClick;
   });
 });
 
@@ -105,8 +110,6 @@ function setView(arr, row) {
     const tds = tr.querySelectorAll("td");
     tds.forEach((td, x) => {
       td.style.backgroundColor = Object.keys(arr[y][x])[0];
-      Object.keys(arr[y][y])[0] && (countResult += 1);
-      console.log(countResult);
     });
   });
 }
@@ -122,19 +125,4 @@ function changeElement(arr, y, x, prevValue, cell, newColor, modY, modX) {
     arr[modY][modX] = { [newColor]: true };
   }
   return arr;
-}
-
-function getResult(arr, row) {
-  const color = td.style.backgroundColor
-  row.forEach((tr, y) => {
-    const tds = tr.querySelectorAll("td");
-    tds.forEach((td, x) => {
-      if (color != Object.keys(matrix[0][0])[0])
-      return;
-      alert('ert')
-      // td.style.backgroundColor = Object.keys(arr[y][x])[0];
-      // Object.keys(arr[y][y])[0] && (countResult += 1);
-      // console.log(countResult);
-    });
-  });
 }
