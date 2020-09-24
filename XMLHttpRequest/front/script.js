@@ -1,5 +1,5 @@
 $.ajax("http://localhost:3000/users/4", {
-  method: "PATCH",
+  method: "PUT",
   data: {
     name: "Maxim",
   },
