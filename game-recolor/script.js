@@ -2,6 +2,7 @@ const parent = document.querySelector(".topology");
 const blockButtons = document.querySelector(".buttons__field");
 const countField = document.querySelector(".count__result-number");
 const countFieldSpan = document.querySelector(".count__result-number span");
+const btnClear = document.querySelector("#clear");
 const span = document.createElement("span");
 const colors = [
   "#392129",
@@ -14,9 +15,9 @@ const colors = [
   // "Aqua",
 ];
 const matrix = [];
-let result = 0;
 let countClick = 0;
 let countResult = 0;
+let result = 0;
 
 createTable(parent, 6, 6);
 initialPaintingTable(parent, colors);
@@ -32,10 +33,11 @@ trs.forEach((tr, y) => {
   tds.forEach((td, x) => {
     const color = td.style.backgroundColor;
     row.push({ [color]: false });
-    result += 1;
   });
   matrix.push(row);
 });
+
+console.log(matrix);
 
 const buttons = document.querySelectorAll("button");
 buttons.forEach((btn) => {
@@ -45,7 +47,7 @@ buttons.forEach((btn) => {
     const btnColor = btn.style.backgroundColor;
     matrix.forEach((row, y) => {
       row.forEach((cell, x) => {
-        if (Object.keys(cell)[0] === btnColor) {
+        if (previous === btnColor) {
           return;
         }
         if (y === 0 && x === 0) matrix[y][x] = { [btnColor]: true };
@@ -60,8 +62,51 @@ buttons.forEach((btn) => {
     countFieldSpan.remove();
     countField.append(span);
     span.textContent = countClick;
+    if (getResultCount(result) === 35) {
+      buttons.forEach(
+        (btn) => btn.classList.contains("color") && (btn.disabled = true)
+      );
+      btnClear.classList.remove("hide");
+    }
   });
 });
+
+btnClear.addEventListener("click", () => {
+  btnClear.classList.add("hide");
+  initialPaintingTable(parent, colors);
+  matrix.splice(0);
+  trs.forEach((tr, y) => {
+    const row = [];
+    const tds = tr.querySelectorAll("td");
+    tds.forEach((td, x) => {
+      const color = td.style.backgroundColor;
+      row.push({ [color]: false });
+    });
+    matrix.push(row);
+  });
+  countClick = 0;
+  result = 0;
+  countFieldSpan.remove();
+  countField.append(span);
+  span.textContent = countClick;
+  buttons.forEach(
+    (btn) => btn.classList.contains("color") && (btn.disabled = false)
+  );
+});
+
+function getResultCount(res) {
+  let previous, current;
+  trs.forEach((tr, y) => {
+    const tds = tr.querySelectorAll("td");
+    tds.forEach((td, x) => {
+      current = td.style.backgroundColor;
+      if (current === previous) res += 1;
+      previous = current;
+    });
+  });
+  result = 0;
+  return res;
+}
 
 function getColor() {
   return this.style.backgroundColor;
@@ -85,6 +130,7 @@ function createButton(parent, colorList) {
     const button = document.createElement("button");
     button.setAttribute.color = colorList[i];
     button.style.backgroundColor = colorList[i];
+    button.classList.add("color");
     parent.append(button);
   }
 }
