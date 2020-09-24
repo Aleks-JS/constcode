@@ -1,23 +1,43 @@
 {
-
-    "users": [{
-        "id": 1,
-        "name": "Sebastian",
-        "surname": "Eschweiler"
-    }, {
-        "id": 2,
-        "name": "Bob",
-        "surname": "Rename"
-    }],
-    "posts": [{
-        "id": 1,
-        "title": "json-server",
-        "author": "John Doe"
-    }],
-
-    "comments": [{
-        "id": 1,
-        "body": "some comments",
-        "postId": 1
-    }]
+  "users": [
+    {
+      "id": 1,
+      "name": "Sebastian",
+      "surname": "Eschweiler"
+    },
+    {
+      "id": 2,
+      "name": "Bob",
+      "surname": "Rename"
+    },
+    {
+      "name": "Marina",
+      "surname": "WTF",
+      "id": 3
+    },
+    {
+      "name": "Marina",
+      "surname": "WTF",
+      "id": 4
+    },
+    {
+      "name": "Marina",
+      "surname": "WTF",
+      "id": 5
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "John Doe"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comments",
+      "postId": 1
+    }
+  ]
 }
