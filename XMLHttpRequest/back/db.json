@@ -1,0 +1,19 @@
+{
+
+    "users": [{
+        "id": 1,
+        "name": "Sebastian",
+        "surname": "Eschweiler"
+    }],
+    "posts": [{
+        "id": 1,
+        "title": "json-server",
+        "author": "John Doe"
+    }],
+
+    "comments": [{
+        "id": 1,
+        "body": "some comments",
+        "postId": 1
+    }]
+}
