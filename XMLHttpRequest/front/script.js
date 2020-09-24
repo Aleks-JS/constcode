@@ -1,9 +1,5 @@
-$.ajax("http://localhost:3000/users", {
-  method: "POST",
-  data: {
-    name: "Marina",
-    surname: "WTF",
-  },
+$.ajax("http://localhost:3000/users/5", {
+  method: "DELETE",
   success(data) {
     document.querySelector("pre").textContent = JSON.stringify(data, null, 3);
   },
