@@ -16,9 +16,22 @@
       "id": 3
     },
     {
-      "name": "Maxim",
-      "surname": "Green",
+      "name": "Stepan",
+      "surname": "Kresnikov",
       "id": 4
+    },
+    {
+      "id": 5,
+      "name": "Alex",
+      "surname": "Kresnikov"
+    },
+    {
+      "id": 6
+    },
+    {
+      "name": "Natalia",
+      "surname": "Uvarova",
+      "id": 7
     }
   ],
   "posts": [
